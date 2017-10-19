@@ -23,3 +23,11 @@
 ## 2.skynet引擎搭建
 <br>           a.检出一份skynet源代码，地址：https://github.com/cloudwu/skynet.git
 <br>           b.编译skynet代码，期间会遇到一些库缺失的问题，安装完后编译即可
+<br>
+编译完成后,在skynet下我们会看到一份skynet/skynet的执行文件，skynet的启动流程可以通过
+追踪skynet-src/skynet_main.c进行了解，在这里不在做具体的阐述。游戏的启动脚本我把他放
+在了shell/gs_run.sh脚本下，通过执行该脚本我们可以将游戏服务器运行起来，当然你得先配置
+好config/gs_config.lua文件，通过配置我们可以知道最终的启动工具是通过snlua bootstrap启
+动bootstrap，然后通过bootstrap启动gs_launcher，gs_launcher.lua去启动游戏逻辑中需要的
+各项服务内容
+
