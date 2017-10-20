@@ -5,6 +5,8 @@ harbor = 0
 start = "gs_launcher"
 bootstrap = "snlua bootstrap"	-- The service for bootstrap
 
+dictator_port = 7002
+
 ------------------路径配置------------------------------
 luaservice = root.."service/?.lua;"..root.."service/?/main.lua;"..root.."skynet/service/?.lua;"..root.."skynet/service/?/main.lua"
 lua_path = root.."lualib/?.lua;"..root.."skynet/lualib/?.lua"
