@@ -27,8 +27,8 @@ function dictator_main_loop(stdin, print_back)
             end
         end
     end)
-    skynet.error(stdin, "disconnected")
-    socket.close(stdin)
+--    skynet.error(stdin, "disconnected")
+--    socket.close(stdin)
 end
 
 local function docmd(cmdline, print_back, stdin)
