@@ -31,3 +31,22 @@
 动bootstrap，然后通过bootstrap启动gs_launcher，gs_launcher.lua去启动游戏逻辑中需要的
 各项服务内容
 
+## 3.游戏后台搭建
+<br> 游戏后台在这套框架中称之为dictator; dictator主要实现的是后台指令，区别游戏中的gm
+指令,dictator主要用来实现在线更新,是否开放玩家登陆,关闭存盘等相关指令;每个服务的启动
+都会向该服务注册一份各服务的地址信息，dictator做为一个指令的发起方，将指令根据地址传送
+到各个服务上；根据这个机制可以实现各个服务代码的在线更新，启动这个服务后，我们会监听
+本机器上的dictator_port端口(在config/gs_config.lua中配置)，通过nc localhost dictator_port
+可以直连上后台，就可以输入相关的指令进行相关操作，如在线更新指令
+update_code service/world/dictatorobj
+
+与此同时，我们还启动了debug_console后台，用于监控各个服务的状态，相应代码位于
+skynet/service/debug_console.lua下；
+
+## 4.lua代码文件在线更新
+<br> 参照云风博客：https://blog.codingnow.com/2008/03/hot_update.html
+<br> 在这个系统中，载入一个文件我们使用了两种方式，一个是系统自带的require，另外一个是
+自己实现的import；代码位于lualib/base/reload.lua下，这种划分相当于把文件按照能否在线更
+新作为了标准；使用require的，我们默认认为此文件不能进行在线更新，使用import则是可以使用
+lualib/base/reload.lua 下的reload文件进行在线更新
+<br> 具体原理待阐述

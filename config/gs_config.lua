@@ -13,5 +13,5 @@ lua_path = root.."lualib/?.lua;"..root.."skynet/lualib/?.lua"
 lua_cpath = root.."skynet/luaclib/?.so"
 cpath = root.."skynet/cservice/?.so"
 lualoader = root.."skynet/lualib/loader.lua"
-luapreload = root.."lualib/base/preload.lua"
+preload = root.."lualib/base/preload.lua"
 ------------------路径配置-------------------------------
