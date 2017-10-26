@@ -45,7 +45,15 @@ function reload(dotfile)
         end
     end
 
-    local ret, msg = pcall(recu, bak_m, new_m)
+    local ret, msg = pcall(function()
+        for k, v in pairs(new_m) do
+            if type(v) == "table" and type(bak_m[k]) == "table" then
+                recu(bak_m[k], v)
+                new_m[k] = bak_m[k]
+            end
+        end
+    end)
+
     if not ret then
         print("reload fail:",  msg)
         --TODO need return back

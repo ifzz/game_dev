@@ -50,3 +50,9 @@ skynet/service/debug_console.lua下；
 新作为了标准；使用require的，我们默认认为此文件不能进行在线更新，使用import则是可以使用
 lualib/base/reload.lua 下的reload文件进行在线更新
 <br> 具体原理待阐述
+在原生lua环境下，我们引用一个文件通常使用require，使用require后我们会把内容放置到package.loaded
+下，如果我们要更新这个文件，首先我们会把package.loaded置控，然后重新require一次，但是这
+种写法会使得一些地方无法更新到 如：local mod = require "mod"; 就算你重新require了一次，
+这里的引用关系保持的还是旧的，除非我们把所有引用关系都遍历更新一次。而这个在线更新机制
+在不解除旧有引用关系的前提下对内部数据进行了替换，详细实现参照代码：
+lualib/base/reload.lua
