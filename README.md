@@ -22,7 +22,8 @@
              
 ## 2.skynet引擎搭建
 <br>           a.检出一份skynet源代码，地址：https://github.com/cloudwu/skynet.git
-<br>           b.编译skynet代码，期间会遇到一些库缺失的问题，安装完后编译即可
+<br>           b.注意：skynet版本我只检出至c91efa513435e71f24fd869e15ef409e0caf6c86，往后有大修改，部分代码无法支持
+<br>           c.编译skynet代码，期间会遇到一些库缺失的问题，安装完后编译即可
 <br>
 编译完成后,在skynet下我们会看到一份skynet/skynet的执行文件，skynet的启动流程可以通过
 追踪skynet-src/skynet_main.c进行了解，在这里不在做具体的阐述。游戏的启动脚本我把他放
