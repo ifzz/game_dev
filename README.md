@@ -57,3 +57,20 @@ lualib/base/reload.lua 下的reload文件进行在线更新
 这里的引用关系保持的还是旧的，除非我们把所有引用关系都遍历更新一次。而这个在线更新机制
 在不解除旧有引用关系的前提下对内部数据进行了替换，详细实现参照代码：
 lualib/base/reload.lua
+
+## 5.关于多服务数据共享(sharedata)
+<br> 在skynet中有一个叫做sharedatad的全局服务, 代码路径：skynet/lualib/sharedata.lua
+支持new|query|update 三种方法；
+sharedata.new(name, v, ...) 通过此方法可以创建一个新的sharedata数据块，v可以是字符串，table
+sharedata.query(name) 通过此方法可以获得已经创建的sharedata数据块，但是我们发现实际美一次
+query都会去创建一次新的table，实际上我们可以在上层的使用方法上去规避他
+sharedata.update(name, v) 可以将名字为name的sharedata使用v进行一次更新
+
+同时，在我的设想中，这个框架对于sharedata的数据应用应该只停留在读取游戏中的配置数据，一般来
+讲只能是导表数据，停留在只读层面上， 我们不会去也不应该去改写sharedata上的数据，有数据需要
+需要变动的时候，我们通过在线调用update的方式去更新这些数据
+
+由上述分析可以知道，我们要实现这写功能，需要有一个专门的服务去启动sharedatad和在线更新
+sharedata
+同时还需要有个文件去做数据加载的功能，需要对query做一层封装，规避重复创建table问题
+把sharedata设置为只读

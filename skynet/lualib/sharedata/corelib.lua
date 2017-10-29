@@ -38,7 +38,8 @@ local function update(root, cobj, gcobj)
 			if type(pointer) == "userdata" then
 				update(v, pointer, gcobj)
 			else
-				children[k] = nil
+				--children[k] = nil
+				rawset(children, k, nil)
 			end
 		end
 	end
@@ -77,7 +78,8 @@ function meta:__index(key)
 		local children = self.__cache
 		if children == nil then
 			children = {}
-			self.__cache = children
+			--self.__cache = children
+			rawset(self, "__cache", children)
 		end
 		local r = children[key]
 		if r then
@@ -89,11 +91,16 @@ function meta:__index(key)
 			__parent = self,
 			__key = key,
 		}, meta)
-		children[key] = r
+		--children[key] = r
+		rawset(children, key, r)
 		return r
 	else
 		return v
 	end
+end
+
+function meta:__newindex(key, val)
+    print("[WARNING] attemp to write sharedata", key, val, debug.traceback())
 end
 
 function meta:__len()

@@ -4,6 +4,7 @@ local manager = require "skynet.manager"
 local httpd = require "http.httpd"
 local sockethelper = require "http.sockethelper"
 local global = require "global"
+local share = require "base.share"
 local dictator = import("service.dictator.dictatorobj")
 local dictatorcmd = import("service.dictator.dictatorcmd")
 
