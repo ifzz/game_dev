@@ -3,8 +3,8 @@ local skynet = require "skynet.manager"
 local global = require "global"
 local interactive = require "base.interactive"
 local share = require "base.share"
-local gamedb = import("service.gamedb.gamedbobj")
-local logiccmd = import("service.gamedb.logiccmd.init")
+local gamedb = import(service_path("gamedbobj"))
+local logiccmd = import(service_path("logiccmd.init"))
 
 
 skynet.start(function()

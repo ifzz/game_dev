@@ -1,7 +1,7 @@
 
 local mCmd = {}
 
-mCmd.testdb = import("service.gamedb.logiccmd.testdb")
+mCmd.testdb = import(service_path("logiccmd.testdb"))
 
 
 function Invoke(sModule, sFunc, ...)

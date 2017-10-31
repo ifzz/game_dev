@@ -1,7 +1,7 @@
 
 local mCmd = {}
 
-mCmd.common = import("service.share.logiccmd.common")
+mCmd.common = import(service_path("logiccmd.common"))
 
 
 function Invoke(sModule, sFunc, ...)

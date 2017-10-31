@@ -5,9 +5,9 @@ local httpd = require "http.httpd"
 local sockethelper = require "http.sockethelper"
 local global = require "global"
 local interactive = require "base.interactive"
-local dictator = import("service.dictator.dictatorobj")
-local dictatorcmd = import("service.dictator.dictatorcmd")
-local logiccmd = import("service.dictator.logiccmd.init")
+local dictator = import(service_path("dictatorobj"))
+local dictatorcmd = import(service_path("dictatorcmd"))
+local logiccmd = import(service_path("logiccmd.init"))
 
 
 local function split_cmdline(cmdline)

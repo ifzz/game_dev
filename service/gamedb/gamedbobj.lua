@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 local mongo = require "mongo"
-local baseobj = import("lualib.base.baseobj")
+local baseobj = import(lualib_path("base.baseobj"))
 
 function NewGameDbObj(...)
     return CGameDb:New(...)

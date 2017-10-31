@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 local interactive = require "base.interactive"
-local baseobj = import("lualib.base.baseobj")
+local baseobj = import(lualib_path("base.baseobj"))
 
 function NewDictatorObj(...)
     return CDictator:New(...)

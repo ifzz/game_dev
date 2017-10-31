@@ -45,4 +45,12 @@ loadfile_ex = function(file_name, mode, env)
     return f
 end
 
+service_path = function(dotfile)
+    return "service."..MY_ADDR.."."..dotfile
+end
+
+lualib_path = function(dotfile)
+    return "lualib".."."..dotfile
+end
+
 require "base.reload"
