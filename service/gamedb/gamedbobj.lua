@@ -28,38 +28,42 @@ function CGameDb:GetDb()
     return self.m_oClient:getDB(self.m_sDbName)
 end
 
-function CGameDb:Insert(...)
+function CGameDb:Insert(sTable, mInsert)
+    --Insert("player", {account="xterm"})
     local obj = self:GetDb()
-    obj:insert(...)
+    obj[sTable]:safe_insert(mInsert)
 end
 
-function CGameDb:Update(mCond, mUpdate, bUpsert, bMulti)
+function CGameDb:Update(sTable, mCond, mUpdate, bUpsert, bMulti)
+    --Update("player, {account="xterm"}, {account="xteam", age=17}, true, false)
     local obj = self:GetDb()
-    obj:update(mCond, mUpdate, bUpsert, bMulti)
+    obj[sTable]:update(mCond, mUpdate, bUpsert, bMulti)
 end
 
-function CGameDb:Delete(mCond, bSingle)
+function CGameDb:Delete(sTable, mCond, bSingle)
     local obj = self:GetDb()
-    --TODO supply
+    obj[sTable]:delete(mCond, bSingle)
 end
 
-function CGameDb:FindOne(mQuery, mSelect)
+function CGameDb:FindOne(sTable, mQuery, mSelect)
     local obj = self:GetDb()
-    local m = obj:findOne(mCond, mSelect)
-    --TODO supply
+    local m = obj[sTable]:findOne(mQuery, mSelect)
     return m
 end
 
-function CGameDb:Find(mQuery, mSelect)
+function CGameDb:Find(sTable, mQuery, mSelect)
     local obj = self:GetDb()
-    local m = obj:find(mQuery, mSelect)
-    --TODO supply
+    local m = obj[sTable]:find(mQuery, mSelect)
+--    while m:hasNext() do
+--        print(m:next())
+--    end
     return m
 end
 
-function CGameDb:EnsureIndex(...)
+function CGameDb:EnsureIndex(sTable, ...)
+    --EnsureIndex({index_key=1}, {unique=true,name="name_index"})
     local obj = self:GetDb()
-    obj:createIndexes(...)
+    obj[sTable]:ensureIndex(...)
 end
 
 function CGameDb:FindAndModify(mConf)
