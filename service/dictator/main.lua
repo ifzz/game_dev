@@ -4,9 +4,10 @@ local manager = require "skynet.manager"
 local httpd = require "http.httpd"
 local sockethelper = require "http.sockethelper"
 local global = require "global"
-local share = require "base.share"
+local interactive = require "base.interactive"
 local dictator = import("service.dictator.dictatorobj")
 local dictatorcmd = import("service.dictator.dictatorcmd")
+local logiccmd = import("service.dictator.logiccmd.init")
 
 
 local function split_cmdline(cmdline)
@@ -66,6 +67,7 @@ end
 
 skynet.start(function()
     global.oDictatorObj = dictator.NewDictatorObj()
+    interactive.dispatch_logic(logiccmd)
 
     local iPort = skynet.getenv("dictator_port") or 7002
     local fd = socket.listen("127.0.0.1", iPort)
@@ -82,5 +84,5 @@ skynet.start(function()
         skynet.fork(dictator_main_loop, id, print_back)
     end)
     manager.register(".dictator")
-    print("dictator service booted")
+    skynet.error("dictator service booted")
 end)

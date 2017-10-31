@@ -1,5 +1,7 @@
-local skynet = require "skynet"
 
+MY_ADDR = ...
+
+local skynet = require "skynet"
 require "base.tableop"
 
 print = function(...)
@@ -25,8 +27,8 @@ super = function(class)
     return getmetatable(class)
 end
 
-trace_msg = function()
-    print(debug.traceback("=====safe_call====="))
+trace_msg = function(msg)
+    print(debug.traceback("=====" .. msg .. "====="))
 end
 
 safe_call = function(func, ...)
