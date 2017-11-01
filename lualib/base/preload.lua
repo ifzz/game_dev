@@ -1,5 +1,7 @@
-local skynet = require "skynet"
 
+MY_ADDR = ...
+
+local skynet = require "skynet"
 require "base.tableop"
 
 print = function(...)
@@ -25,8 +27,8 @@ super = function(class)
     return getmetatable(class)
 end
 
-trace_msg = function()
-    print(debug.traceback("=====safe_call====="))
+trace_msg = function(msg)
+    print(debug.traceback("=====" .. msg .. "====="))
 end
 
 safe_call = function(func, ...)
@@ -41,6 +43,14 @@ loadfile_ex = function(file_name, mode, env)
     local f, s = load(data, file_name, "bt", env)
     assert(f, s)
     return f
+end
+
+service_path = function(dotfile)
+    return "service."..MY_ADDR.."."..dotfile
+end
+
+lualib_path = function(dotfile)
+    return "lualib".."."..dotfile
 end
 
 require "base.reload"
