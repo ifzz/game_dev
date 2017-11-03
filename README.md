@@ -111,4 +111,20 @@ skyent 封装了一套mongodb的lua接口，位于skyent/lualib/mongo.lua；这�
 
 具体的代码实现在lualib/base/interactive.lua下。
 
+## 8.客户端服务端协议交互(protobuf)
+<br> CS之间的通讯我们引入protobuf，协议的解析我们采用云风写的pbc
+首先我们需要在机器上安装一个protobuf，我采用的是直接检出git安装的，git地址：
+git clone https://github.com/google/protobuf.git
+在运行./autogen.sh 之前，我们还需要安装一些必要的内容，有unzip,autoconf,automake,libtool
+<br> 1.执行 ./autogen.sh
+<br> 2.执行 ./configure 执行过程中可能会遇到一些问题，通常是库缺失，自行安装即可
+<br> 3.make
+<br> 4.make check
+<br> 5.make install
+
+<br> 编译pbc的时候采用了一种比较取巧的方式，直接将pbc:https://github.com/cloudwu/pbc.git
+下中我们所需要的文件放入到skynet下的pbc文件夹下，有makefile，src，pbc.h，将pbc/binding下
+的pbc-lua53放到pbc下，然后通过改写skynet/Makefile文件直接进行编译导入,最终，我们的使用方
+式和pbc/binding下介绍的一致,只是我们将protobuff.lua文件放到了game_dev/lualib/base下,这样
+我们就可以直接require "base.protobuf" 使用它
 
