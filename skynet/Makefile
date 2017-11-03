@@ -48,7 +48,7 @@ CSERVICE = snlua logger gate harbor
 LUA_CLIB = skynet socketdriver bson mongo md5 netpack \
   clientsocket memory profile multicast \
   cluster crypt sharedata stm sproto lpeg \
-  mysqlaux debugchannel
+  mysqlaux debugchannel protobuf
 
 SKYNET_SRC = skynet_main.c skynet_handle.c skynet_module.c skynet_mq.c \
   skynet_server.c skynet_start.c skynet_timer.c skynet_error.c \
@@ -129,6 +129,9 @@ $(LUA_CLIB_PATH)/mysqlaux.so : lualib-src/lua-mysqlaux.c | $(LUA_CLIB_PATH)
 
 $(LUA_CLIB_PATH)/debugchannel.so : lualib-src/lua-debugchannel.c | $(LUA_CLIB_PATH)
 	$(CC) $(CFLAGS) $(SHARED) -Iskynet-src $^ -o $@	
+
+$(LUA_CLIB_PATH)/protobuf.so : pbc/pbc-lua53.c | $(LUA_CLIB_PATH)
+	cd pbc && make clean all && cd - && $(CC) $(CFLAGS) $(SHARED) -Ipbc/src $^ -o $@ -L./pbc/build -lpbc
 
 clean :
 	rm -f $(SKYNET_BUILD_PATH)/skynet $(CSERVICE_PATH)/*.so $(LUA_CLIB_PATH)/*.so
